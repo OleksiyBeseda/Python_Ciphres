@@ -64,3 +64,20 @@ print(f'\nEncrypted text: {text}')
 print(f'Key: {custom_key}')               #string formatter equals to print('Key: ' + custom_key)
 decryption = decrypt(text, custom_key)
 print(f'\nDecrypted text: {decryption}\n')
+
+
+
+# Modern way to cipher
+# sample code / simplified example
+from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+import os
+
+password = b'my secret passphrase'   # not humanreadable password, better random
+salt = os.urandom(16)
+kdf = Scrypt(salt=salt, length=32, n=2**14, r=8, p=1)
+key = kdf.derive(password)           # 256-bit key
+aesgcm = AESGCM(key)
+nonce = os.urandom(12)
+ciphertext = aesgcm.encrypt(nonce, b'my message here', associated_data=None)
+# Store/send salt + nonce + ciphertext
