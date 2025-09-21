@@ -64,7 +64,7 @@ print(f'\nEncrypted text: {text}')
 print(f'Key: {custom_key}')               #string formatter equals to print('Key: ' + custom_key)
 decryption = decrypt(text, custom_key)
 print(f'\nDecrypted text: {decryption}\n')
-
+#Method  can be easily decrypted by Kasiski's method https://www.youtube.com/watch?v=Pl6AcJOEFvE&t=17s
 
 
 # Modern way to cipher
